@@ -1,0 +1,104 @@
+<div class="container-fluid">
+
+    <app-page-title title="Users List" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+  
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="row mb-2">
+              <div class="col-sm-4">
+                <div class="search-box me-2 mb-2 d-inline-block">
+                  <div class="position-relative">
+                    <input type="text" class="form-control" id="searchTableList" placeholder="Search...">
+                    <i class="bx bx-search-alt search-icon"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end row -->
+            <div class="table-responsive">
+              <table class="table align-middle table-nowrap table-hover dt-responsive nowrap w-100" id="userList-table">
+                <thead class="table-light">
+                  <tr>
+                    <th scope="col" style="width: 40px;">#</th>
+                    <th scope="col">Full Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Company</th>
+                    <th scope="col">Professional Email</th>
+                    <th scope="col">Card ID</th>
+                    <th scope="col">Phone Number</th>
+                    <th scope="col">Status</th>
+                    <th scope="col" style="width: 200px;">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of students;let i = index;">
+                    <td>
+                      <div class="avatar-xs" *ngIf="!data.pic">
+                        <span class="avatar-title rounded-circle">
+                          {{data.lastName.charAt(0) | uppercase}}
+                        </span>
+                      </div>
+                      <div *ngIf="data.pic">
+                        <img class="rounded-circle avatar-xs" [src]="data.pic" alt="">
+                      </div>
+                    </td>
+                    <td>
+                      <p class="text-muted mb-0">{{data.lastName}} {{data.firstName}}</p>
+                    </td>
+                    <td>{{data.login}}</td>
+                    <td> {{data.company}} </td>
+                    <td>
+                      {{data.emailPro}}
+                    </td>
+                    <td>
+                      {{data.cin}}
+                    </td>
+                    <td>
+                        {{data.phoneNumber}}
+                      </td>
+                      <td class="list-inline font-size-20 text-center mb-0">
+                        <div *ngIf="!data.activated">
+                          <i class="bx bxs-x-circle font-size-20 text-danger me-1"></i>
+                        </div>
+                        <div *ngIf="data.activated">
+                          <i class="bx bxs-circle font-size-20 text-success me-1"></i>
+                        </div>
+                      </td>
+                    <td>
+                      <ul class="list-inline font-size-20 contact-links mb-0">
+                        <li class="list-inline-item px-2">
+                          <a href="javascript:void(0);" tooltip="Message"><i class="bx bx-message-square-dots"></i></a>
+                        </li>
+                        <li class="list-inline-item px-2">
+                          <a href="javascript:void(0);" tooltip="Profile"><i class="bx bx-user-circle"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                          <div dropdown class="dropdown">
+                            <a dropdownToggle href="javascript: void(0);" class="dropdown-toggle card-drop px-2 show" aria-expanded="true"> <i class="mdi mdi-dots-horizontal font-size-18"></i> </a>
+                            <ul *dropdownMenu class="dropdown-menu dropdown-menu-end show" style="position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate(0px, 31.25px);" placement="bottom-end">
+                              <li><a href="javascript:void(0);" (click)="removeUser(data.id)" class="dropdown-item remove-list" data-remove-id="8">
+                                <i class="bx bxs-no-entry font-size-16 text-danger me-1"></i> Blcok</a></li>
+                            </ul>
+                          </div>
+                        </li>
+                      </ul>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="row">
+              <div class="col-lg-12">
+                <ul class="pagination pagination-rounded justify-content-center mt-4">
+                  <pagination [totalItems]="(total | async)!" [(ngModel)]="service.page">
+                  </pagination>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
